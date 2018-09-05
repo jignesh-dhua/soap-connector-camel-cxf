@@ -1,0 +1,9 @@
+camel:
+  springboot:
+    name: SOAP Connector
+  component:
+    servlet:
+      mapping:
+        contextPath: /soap-connector/*
+server:
+   port: 8080

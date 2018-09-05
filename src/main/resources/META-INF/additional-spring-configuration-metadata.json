@@ -1,0 +1,17 @@
+{"properties": [
+  {
+    "name": "scheduler.cron.expression",
+    "type": "java.lang.String",
+    "description": "A description for 'scheduler.cron.expression'"
+  },
+  {
+    "name": "example.generate-order-period",
+    "type": "java.lang.String",
+    "description": "A description for 'example.generate-order-period'"
+  },
+  {
+    "name": "example.process-order-period",
+    "type": "java.lang.String",
+    "description": "A description for 'example.process-order-period'"
+  }
+]}

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:amq="http://activemq.apache.org/schema/core"
+	xmlns:camel="http://camel.apache.org/schema/spring"
+	xmlns:cxf="http://camel.apache.org/schema/cxf"
+	xmlns:http-conf="http://cxf.apache.org/transports/http/configuration"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+	xmlns:http="http://cxf.apache.org/transports/http/configuration"
+	xmlns:sec="http://cxf.apache.org/configuration/security"
+
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd             http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd                  http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd http://cxf.apache.org/transports/http/configuration         http://cxf.apache.org/schemas/configuration/http-conf.xsd">
+
+
+
+ 	<cxf:cxfEndpoint endpointName="s:DataserviceSoap11"
+		id="KVKEndpoint" serviceName="s:DataserviceService"
+		wsdlURL="classpath:wsdl/KVK-KvKDataservice.wsdl"
+		xmlns:s="http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02">
+
+		<cxf:properties>
+			<entry key="dataFormat" value="PAYLOAD" />
+		</cxf:properties>
+		<!--<cxf:outInterceptors>
+
+			 <bean id="wssOutInterceptor" class="org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor"> 
+				<property name="properties"> <map> <entry key="user" value="cert" /> <entry 
+				key="signatureKeyIdentifier" value="DirectReference" /> <entry key="signaturePropFile" 
+				value="client_sec.properties" /> <entry key="action" value="Signature Timestamp" 
+				/> <entry key="password" value="damith" /> </map> </property> </bean>
+		</cxf:outInterceptors> -->
+	</cxf:cxfEndpoint>
+
+	<!-- <http:conduit
+		name="{http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02}DataserviceSoap11.http-conduit">
+
+
+		<http:tlsClientParameters
+			disableCNCheck="true">
+			<sec:keyManagers keyPassword="damith">
+				<sec:keyStore type="jks" password="damith"
+					file="C:/Users/dhuaj/Documents/Personal/soapUiPoject/certificates/development_companyinfo_bridgefund_nl_p7b.jks" />
+			</sec:keyManagers>
+			<sec:certAlias>cert</sec:certAlias>
+			<sec:trustManagers>
+				<sec:keyStore type="jks" password="damith"
+					file="C:/Users/dhuaj/Documents/Personal/soapUiPoject/certificates/development_companyinfo_bridgefund_nl_p7b.jks" />
+			</sec:trustManagers>
+		</http:tlsClientParameters>
+
+	</http:conduit> -->
+
+	<camelContext allowUseOriginalMessage="true"
+		id="camelContext" xmlns="http://camel.apache.org/schema/spring">
+		<!-- <propertyPlaceholder id="properties" location="classpath:application.properties"/> -->
+		<camel:packageScan>
+			<camel:package>com.mycompany.soapconnector.route</camel:package>
+		</camel:packageScan>
+		<route id="_route1">
+			<from id="_from1" uri="timer://foo?repeatCount=1" />
+			<setBody id="_setBody1">
+				<simple>Hello World from camel-contex.xml</simple>
+			</setBody>
+			<log id="_log1" message=">>> ${body}" />
+		</route>
+	</camelContext>
+</beans>
