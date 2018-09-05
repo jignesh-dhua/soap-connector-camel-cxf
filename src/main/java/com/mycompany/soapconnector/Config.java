@@ -103,7 +103,7 @@ public class Config {
 
 	    	
 			KeyStoreParameters ksp = new KeyStoreParameters();
-			ksp.setResource("C:/Users/dhuaj/Documents/Personal/soapUiPoject/certificates/development_companyinfo_bridgefund_nl_p7b.jks");
+			ksp.setResource("/home/ubuntu/development_companyinfo_bridgefund_nl_p7b.jks");
 			ksp.setPassword("damith");
 
 			KeyManagersParameters kmp = new KeyManagersParameters();
