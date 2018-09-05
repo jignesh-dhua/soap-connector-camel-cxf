@@ -4,7 +4,7 @@
 	<springProperty scope="context" name="springAppName"
 		source="camel.springboot.name" />
 
-	<property name="LOG_HOME" value="/logs" />
+	<property name="LOG_HOME" value="/home/ubuntu/logs" />
 	<property name="LOG_FILE_NAME" value="${springAppName}" />
 
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
