@@ -125,20 +125,21 @@ public class Config {
 	    	outInterceptor.add(getWss4JOutInterceptor());
 	    	
 	    	cxfEndpoint.setOutInterceptors(outInterceptor);
-	    	cxfEndpoint.setFeatures(
-	    	        new ArrayList<>(Arrays.asList(loggingFeature())));
+//	    	cxfEndpoint.setFeatures(
+//	    	        new ArrayList<>(Arrays.asList(loggingFeature())));
+	    	
 	    	
 	    	return cxfEndpoint;
 	    }
 	 
-	 @SuppressWarnings("deprecation")
-	@Bean
-	  public LoggingFeature loggingFeature() {
-	    LoggingFeature loggingFeature = new LoggingFeature();
-	    loggingFeature.setPrettyLogging(true);
-
-	    return loggingFeature;
-	  }
+//	 @SuppressWarnings("deprecation")
+//	@Bean
+//	  public LoggingFeature loggingFeature() {
+//	    LoggingFeature loggingFeature = new LoggingFeature();
+//	    loggingFeature.setPrettyLogging(true);
+//
+//	    return loggingFeature;
+//	  }
 		private static WSS4JOutInterceptor getWss4JOutInterceptor() {
 	        final Map<String, Object> outProps = new HashMap<String, Object>();
 	
