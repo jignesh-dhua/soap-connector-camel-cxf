@@ -1,0 +1,1 @@
+# soap-connector-camel-cxf
