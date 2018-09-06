@@ -10,15 +10,14 @@ import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.KeyManager;
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
 import javax.net.ssl.X509TrustManager;
 
 import org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor;
-import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ImportResource;
 
 @SpringBootApplication
 //@ImportResource({ "classpath:spring/camel-context.xml" })
@@ -61,10 +60,13 @@ public class Application {
 		sslContext.init(kms, new X509TrustManager[]{new HttpsTrustManager()}, new SecureRandom());
 		SSLContext.setDefault(sslContext);
 
-		HostnameVerifier hostnameVerifier = NoopHostnameVerifier.INSTANCE;
 
 		HttpsURLConnection.setDefaultSSLSocketFactory(sslContext.getSocketFactory());
-		HttpsURLConnection.setDefaultHostnameVerifier(hostnameVerifier);
+		HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier() {
+            public boolean verify(String hostname, SSLSession session) {
+                return true;
+            }
+        });
 	    
 	    
 		SpringApplication.run(Application.class, args);
