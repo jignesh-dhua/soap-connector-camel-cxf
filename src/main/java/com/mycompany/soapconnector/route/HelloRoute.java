@@ -32,13 +32,15 @@ public class HelloRoute  extends RouteBuilder{
 			//.setBody(constant(request1))
 					
 			.log("SOAP Request :: ${body}")
-			.to("cxf:bean:KVKEndpoint")
+
 			
-//			.setHeader("Accept-Encoding", constant("gzip,deflate"))
-//			.setHeader("Content-Type", constant("text/xml;charset=UTF-8"))
-//			.setHeader("SOAPAction", constant("http://es.kvk.nl/ophalenInschrijving"))
-//			.setHeader("Host", constant("webservices.preprod.kvk.nl"))
-//			.setHeader("Connection", constant("Keep-Alive"))
+			.setHeader("Accept-Encoding", constant("gzip,deflate"))
+			.setHeader("Content-Type", constant("text/xml;charset=UTF-8"))
+			.setHeader("SOAPAction", constant("http://es.kvk.nl/ophalenInschrijving"))
+			.setHeader("Host", constant("webservices.preprod.kvk.nl"))
+			.setHeader("Connection", constant("Keep-Alive"))
+			
+			.to("cxf:bean:KVKEndpoint")
 //		
 //			.toD("https4://webservices.preprod.kvk.nl/postbus2")
 			
