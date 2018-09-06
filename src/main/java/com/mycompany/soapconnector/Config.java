@@ -157,12 +157,12 @@ public class Config {
 //	            outProps.put(WSHandlerConstants.SIGNATURE_PARTS, "{}{}Body;{}{http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd}Timestamp}");
 //	        }
 	        outProps.put(WSHandlerConstants.SIGNATURE_PARTS,
-	                "{Element}{http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd}Timestamp;" +
-	                "{Element}{http://schemas.xmlsoap.org/soap/envelope/}Body;"+
-	                "{Element}{http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02}ophalenInschrijvingRequest"
+	                "{}{http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd}Timestamp;" +
+	                "{}{http://schemas.xmlsoap.org/soap/envelope/}Body;"+
+	                "{}{http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02}ophalenInschrijvingRequest"
 	                //"{Element}{http://www.w3.org/2005/08/addressing}Header"
 	        		);
-	        outProps.put(WSHandlerConstants.SIG_ALGO, "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256");
+	        //outProps.put(WSHandlerConstants.SIG_ALGO, "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256");
 	
 	        return new WSS4JOutInterceptor(outProps);
 	    }
