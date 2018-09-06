@@ -122,7 +122,7 @@ public class Config {
 	    	cxfEndpoint.setSslContextParameters(sslContextParameters);
 	    	
 	    	List<Interceptor<? extends Message>> outInterceptor= new ArrayList<>();
-	    	//outInterceptor.add(getWss4JOutInterceptor());
+	    	outInterceptor.add(getWss4JOutInterceptor());
 	    	
 	    	cxfEndpoint.setOutInterceptors(outInterceptor);
 	    	cxfEndpoint.setFeatures(
@@ -149,8 +149,8 @@ public class Config {
 	        
 	        outProps.put(WSHandlerConstants.PW_CALLBACK_CLASS, ClientKeystorePasswordCallbackHandler.class.getName());
 	        outProps.put(WSHandlerConstants.SIG_PROP_FILE, "client_sec.properties");
-	        //outProps.put(WSHandlerConstants.SIG_KEY_ID, "DirectReference"); // Using "X509KeyIdentifier" is also supported by oppslagstjenesten
-	        outProps.put(WSHandlerConstants.SIG_KEY_ID, "X509KeyIdentifier");
+	        outProps.put(WSHandlerConstants.SIG_KEY_ID, "DirectReference"); // Using "X509KeyIdentifier" is also supported by oppslagstjenesten
+	        //outProps.put(WSHandlerConstants.SIG_KEY_ID, "X509KeyIdentifier");
 //	        if (signPaaVegneAv) {
 //	            outProps.put(WSHandlerConstants.SIGNATURE_PARTS, "{}{}Body;{}{http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd}Timestamp};{}{http://kontaktinfo.difi.no/xsd/oppslagstjeneste/16-02}Oppslagstjenesten");
 //	        } else {
