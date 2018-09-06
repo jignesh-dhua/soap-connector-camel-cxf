@@ -144,7 +144,7 @@ public class Config {
 	        final Map<String, Object> outProps = new HashMap<String, Object>();
 	
 	        // for outgoing messages: Signature and Timestamp validation
-	        outProps.put(WSHandlerConstants.ACTION, WSHandlerConstants.SIGNATURE + " " + WSHandlerConstants.TIMESTAMP+" "+ WSHandlerConstants.ENCRYPT);
+	        outProps.put(WSHandlerConstants.ACTION, WSHandlerConstants.SIGNATURE + " " + WSHandlerConstants.TIMESTAMP);
 	        outProps.put(WSHandlerConstants.USER, "cert");
 	        
 	        outProps.put(WSHandlerConstants.PW_CALLBACK_CLASS, ClientKeystorePasswordCallbackHandler.class.getName());
