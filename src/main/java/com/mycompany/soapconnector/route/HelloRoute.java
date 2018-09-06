@@ -9,7 +9,6 @@ public class HelloRoute  extends RouteBuilder{
 
 	String request1= "<ns:ophalenInschrijvingRequest xmlns:ns=\"http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02\">\n" + 
 			"         <ns:klantreferentie>SoapUI-TEST</ns:klantreferentie>\n" + 
-			"         <!--ns:kvkNummer>?</ns:kvkNummer-->\n" + 
 			"         <ns:rsin>992353427</ns:rsin>\n" + 
 			"      </ns:ophalenInschrijvingRequest>";
 	
