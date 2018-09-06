@@ -103,7 +103,7 @@ public class Config {
 
 	    	
 			KeyStoreParameters ksp = new KeyStoreParameters();
-			ksp.setResource("/home/ubuntu/final.jks");
+			ksp.setResource("/home/ubuntu/cert.pfx");
 			ksp.setPassword("damith");
 
 			KeyManagersParameters kmp = new KeyManagersParameters();

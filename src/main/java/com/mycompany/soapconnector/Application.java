@@ -40,7 +40,7 @@ public class Application {
 		
 		
 		KeyStore clientStore = KeyStore.getInstance("JKS");
-		clientStore.load(new FileInputStream(new File("/home/ubuntu/final.jks")), "damith".toCharArray());
+		clientStore.load(new FileInputStream(new File("/home/ubuntu/cert.pfx")), "damith".toCharArray());
 		KeyManagerFactory kmf = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
 		kmf.init(clientStore, "damith".toCharArray());
 		KeyManager[] kms = kmf.getKeyManagers();
@@ -49,7 +49,7 @@ public class Application {
 		// O=DAIMLER, C=DE"
 		// to your cacerts Store.
 		KeyStore trustStore = KeyStore.getInstance("JKS");
-		trustStore.load(new FileInputStream("/home/ubuntu/final.jks"), "damith".toCharArray());
+		trustStore.load(new FileInputStream("/home/ubuntu/cert.pfx"), "damith".toCharArray());
 
 		TrustManagerFactory tmf = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
 		tmf.init(trustStore);
