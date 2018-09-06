@@ -122,7 +122,7 @@ public class Config {
 	    	cxfEndpoint.setSslContextParameters(sslContextParameters);
 	    	
 	    	List<Interceptor<? extends Message>> outInterceptor= new ArrayList<>();
-	    	outInterceptor.add(getWss4JOutInterceptor());
+	    	//outInterceptor.add(getWss4JOutInterceptor());
 	    	
 	    	cxfEndpoint.setOutInterceptors(outInterceptor);
 	    	cxfEndpoint.setFeatures(
