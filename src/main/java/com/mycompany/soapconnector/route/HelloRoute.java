@@ -27,9 +27,9 @@ public class HelloRoute  extends RouteBuilder{
 		
 		from("timer:test?repeatCount=1")
 			.log("Hello World")
-			//.setBody(constant("resource:classpath:/soap/soap-request.xml"))
+			.setBody(constant("resource:classpath:/soap/soap-request.xml"))
 			
-			.setBody(constant(request2))
+			//.setBody(constant(request1))
 					
 			.log("SOAP Request :: ${body}")
 			.to("cxf:bean:KVKEndpoint")

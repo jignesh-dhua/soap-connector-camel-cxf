@@ -99,7 +99,7 @@ public class Config {
 	    	cxfEndpoint.setWsdlURL("classpath:wsdl/KVK-KvKDataservice.wsdl");
 	    	cxfEndpoint.setEndpointName(new QName("http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02", "DataserviceSoap11"));
 	    	cxfEndpoint.setServiceName(new QName("http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02", "DataserviceService"));
-	    	cxfEndpoint.setDataFormat(DataFormat.PAYLOAD);
+	    	cxfEndpoint.setDataFormat(DataFormat.RAW);
 
 	    	
 			KeyStoreParameters ksp = new KeyStoreParameters();
