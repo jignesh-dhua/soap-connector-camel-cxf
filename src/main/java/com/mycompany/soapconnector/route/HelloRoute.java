@@ -12,6 +12,10 @@ public class HelloRoute  extends RouteBuilder{
 			"         <ns:rsin>992353427</ns:rsin>\n" + 
 			"      </ns:ophalenInschrijvingRequest>";
 	
+	String request2= "<ophalenInschrijvingRequest>\n" + 
+			"         <klantreferentie>SoapUI-TEST</klantreferentie>\n" + 
+			"         <rsin>992353427</rsin>\n" + 
+			"      </ophalenInschrijvingRequest>";
 	
 	@Override
 	public void configure() throws Exception {
@@ -25,7 +29,7 @@ public class HelloRoute  extends RouteBuilder{
 			.log("Hello World")
 			//.setBody(constant("resource:classpath:/soap/soap-request.xml"))
 			
-			.setBody(constant(request1))
+			.setBody(constant(request2))
 					
 			.log("SOAP Request :: ${body}")
 			.to("cxf:bean:KVKEndpoint")
