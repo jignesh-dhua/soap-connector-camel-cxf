@@ -26,20 +26,20 @@ public class Application {
 	public static void main(String[] args) throws Exception {
 		
 		
-//		System.setProperty("javax.net.ssl.trustStore", "C:/Users/dhuaj/Documents/Personal/soapUiPoject/certificates/mitansh/new_trust_keystore.jks");
-//	    System.setProperty("javax.net.ssl.trustStorePassword", "damith");
-//	    System.setProperty("javax.net.ssl.trustStoreType", "jks");
+		System.setProperty("javax.net.ssl.trustStore", "/home/ubuntu/cert.pfx");
+	    System.setProperty("javax.net.ssl.trustStorePassword", "damith");
+	    System.setProperty("javax.net.ssl.trustStoreType", "PKCS12");
 //
 //	    //my certificate and password
 //	    //System.setProperty("javax.net.ssl.keyStore", "C:/Users/dhuaj/Documents/Personal/soapUiPoject/certificates/cert.pfx");
 //	    //System.setProperty("javax.net.ssl.keyStoreType", "PKCS12");
 //	    
-//	    System.setProperty("javax.net.ssl.keyStore", "C:/Users/dhuaj/Documents/Personal/soapUiPoject/certificates/final/new_identity_keystore.jks");
-//	    System.setProperty("javax.net.ssl.keyStoreType", "jks");
-//	    System.setProperty("javax.net.ssl.keyStorePassword", "damith");
+	    System.setProperty("javax.net.ssl.keyStore", "/home/ubuntu/cert.pfx");
+	    System.setProperty("javax.net.ssl.keyStoreType", "PKCS12");
+	    System.setProperty("javax.net.ssl.keyStorePassword", "damith");
 		
 		
-		KeyStore clientStore = KeyStore.getInstance("JKS");
+		KeyStore clientStore = KeyStore.getInstance("PKCS12");
 		clientStore.load(new FileInputStream(new File("/home/ubuntu/cert.pfx")), "damith".toCharArray());
 		KeyManagerFactory kmf = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
 		kmf.init(clientStore, "damith".toCharArray());
@@ -55,7 +55,7 @@ public class Application {
 		tmf.init(trustStore);
 		TrustManager[] tms = tmf.getTrustManagers();
 
-		final SSLContext sslContext = SSLContext.getInstance("TLS");
+		final SSLContext sslContext = SSLContext.getInstance("SSLv3");
 		//sslContext.init(kms, tms, new SecureRandom());
 		sslContext.init(kms, new X509TrustManager[]{new HttpsTrustManager()}, new SecureRandom());
 		SSLContext.setDefault(sslContext);

@@ -27,9 +27,9 @@ public class HelloRoute  extends RouteBuilder{
 		
 		from("timer:test?repeatCount=1")
 			.log("Hello World")
-			.setBody(constant("resource:classpath:/soap/soap-request.xml"))
+			//.setBody(constant("resource:classpath:/soap/soap-request.xml"))
 			
-			//.setBody(constant(request1))
+			.setBody(constant(request2))
 					
 			.log("SOAP Request :: ${body}")
 

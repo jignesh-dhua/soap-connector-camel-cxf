@@ -99,7 +99,7 @@ public class Config {
 	    	cxfEndpoint.setWsdlURL("classpath:wsdl/KVK-KvKDataservice.wsdl");
 	    	cxfEndpoint.setEndpointName(new QName("http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02", "DataserviceSoap11"));
 	    	cxfEndpoint.setServiceName(new QName("http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02", "DataserviceService"));
-	    	cxfEndpoint.setDataFormat(DataFormat.MESSAGE);
+	    	cxfEndpoint.setDataFormat(DataFormat.PAYLOAD);
 
 	    	
 			KeyStoreParameters ksp = new KeyStoreParameters();
@@ -122,7 +122,7 @@ public class Config {
 	    	cxfEndpoint.setSslContextParameters(sslContextParameters);
 	    	
 	    	List<Interceptor<? extends Message>> outInterceptor= new ArrayList<>();
-	    	//outInterceptor.add(getWss4JOutInterceptor());
+	    	outInterceptor.add(getWss4JOutInterceptor());
 	    	
 	    	cxfEndpoint.setOutInterceptors(outInterceptor);
 	    	cxfEndpoint.setFeatures(
@@ -144,7 +144,7 @@ public class Config {
 	        final Map<String, Object> outProps = new HashMap<String, Object>();
 	
 	        // for outgoing messages: Signature and Timestamp validation
-	        outProps.put(WSHandlerConstants.ACTION, WSHandlerConstants.SIGNATURE + " " + WSHandlerConstants.TIMESTAMP);
+	        outProps.put(WSHandlerConstants.ACTION, WSHandlerConstants.SIGNATURE + " " + WSHandlerConstants.TIMESTAMP+" "+ WSHandlerConstants.ENCRYPT);
 	        outProps.put(WSHandlerConstants.USER, "cert");
 	        
 	        outProps.put(WSHandlerConstants.PW_CALLBACK_CLASS, ClientKeystorePasswordCallbackHandler.class.getName());
