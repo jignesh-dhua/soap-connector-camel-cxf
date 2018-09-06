@@ -38,9 +38,9 @@ public class Config {
 			public void beforeApplicationStart(CamelContext context) {
 
 				log.info("################### Before Application Start ############################");
-//				context.getGlobalOptions().put("http.proxyHost", "ouparray.oup.com");
-//				context.getGlobalOptions().put("http.proxyPort", "8080");
-//				context.setUseMDCLogging(true);
+				context.getGlobalOptions().put("http.proxyHost", "ouparray.oup.com");
+				context.getGlobalOptions().put("http.proxyPort", "8080");
+				context.setUseMDCLogging(true);
 //				context.setTracing(true);
 //
 //				
@@ -103,7 +103,7 @@ public class Config {
 
 	    	
 			KeyStoreParameters ksp = new KeyStoreParameters();
-			ksp.setResource("/home/ubuntu/development_companyinfo_bridgefund_nl_p7b.jks");
+			ksp.setResource("/home/ubuntu/keystore.ImportKey");
 			ksp.setPassword("damith");
 
 			KeyManagersParameters kmp = new KeyManagersParameters();
@@ -125,21 +125,21 @@ public class Config {
 	    	//outInterceptor.add(getWss4JOutInterceptor());
 	    	
 	    	cxfEndpoint.setOutInterceptors(outInterceptor);
-//	    	cxfEndpoint.setFeatures(
-//	    	        new ArrayList<>(Arrays.asList(loggingFeature())));
+	    	cxfEndpoint.setFeatures(
+	    	        new ArrayList<>(Arrays.asList(loggingFeature())));
 	    	
 	    	
 	    	return cxfEndpoint;
 	    }
 	 
 //	 @SuppressWarnings("deprecation")
-//	@Bean
-//	  public LoggingFeature loggingFeature() {
-//	    LoggingFeature loggingFeature = new LoggingFeature();
-//	    loggingFeature.setPrettyLogging(true);
-//
-//	    return loggingFeature;
-//	  }
+	@Bean
+	  public LoggingFeature loggingFeature() {
+	    LoggingFeature loggingFeature = new LoggingFeature();
+	    loggingFeature.setPrettyLogging(true);
+
+	    return loggingFeature;
+	  }
 		private static WSS4JOutInterceptor getWss4JOutInterceptor() {
 	        final Map<String, Object> outProps = new HashMap<String, Object>();
 	
@@ -149,16 +149,22 @@ public class Config {
 	        
 	        outProps.put(WSHandlerConstants.PW_CALLBACK_CLASS, ClientKeystorePasswordCallbackHandler.class.getName());
 	        outProps.put(WSHandlerConstants.SIG_PROP_FILE, "client_sec.properties");
-	        outProps.put(WSHandlerConstants.SIG_KEY_ID, "DirectReference"); // Using "X509KeyIdentifier" is also supported by oppslagstjenesten
+	        //outProps.put(WSHandlerConstants.SIG_KEY_ID, "DirectReference"); // Using "X509KeyIdentifier" is also supported by oppslagstjenesten
+	        outProps.put(WSHandlerConstants.SIG_KEY_ID, "X509KeyIdentifier");
 //	        if (signPaaVegneAv) {
 //	            outProps.put(WSHandlerConstants.SIGNATURE_PARTS, "{}{}Body;{}{http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd}Timestamp};{}{http://kontaktinfo.difi.no/xsd/oppslagstjeneste/16-02}Oppslagstjenesten");
 //	        } else {
 //	            outProps.put(WSHandlerConstants.SIGNATURE_PARTS, "{}{}Body;{}{http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd}Timestamp}");
 //	        }
+	        outProps.put(WSHandlerConstants.SIGNATURE_PARTS,
+	                "{Element}{http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd}Timestamp;" +
+	                "{Element}{http://schemas.xmlsoap.org/soap/envelope/}Body;"+
+	                "{Element}{http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02}ophalenInschrijvingRequest"
+	                //"{Element}{http://www.w3.org/2005/08/addressing}Header"
+	        		);
 	        outProps.put(WSHandlerConstants.SIG_ALGO, "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256");
 	
 	        return new WSS4JOutInterceptor(outProps);
-			
 	    }
 
 }

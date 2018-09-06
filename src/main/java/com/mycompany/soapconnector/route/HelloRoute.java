@@ -1,6 +1,7 @@
 package com.mycompany.soapconnector.route;
 
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.cxf.binding.soap.SoapFault;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -15,6 +16,12 @@ public class HelloRoute  extends RouteBuilder{
 	
 	@Override
 	public void configure() throws Exception {
+		
+		onException(SoapFault.class)
+			.log("Soap Fault")
+			.log("Body :: ${body}");
+		
+		
 		from("timer:test?repeatCount=1")
 			.log("Hello World")
 			//.setBody(constant("resource:classpath:/soap/soap-request.xml"))
