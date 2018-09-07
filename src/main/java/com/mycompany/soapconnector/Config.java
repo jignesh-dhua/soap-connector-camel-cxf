@@ -19,6 +19,7 @@ import org.apache.camel.util.jsse.TrustManagersParameters;
 import org.apache.cxf.feature.LoggingFeature;
 import org.apache.cxf.interceptor.Interceptor;
 import org.apache.cxf.message.Message;
+import org.apache.cxf.ws.addressing.impl.AddressingFeatureApplier;
 import org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor;
 import org.apache.wss4j.dom.handler.WSHandlerConstants;
 import org.slf4j.Logger;
@@ -123,11 +124,12 @@ public class Config {
 	    	
 	    	List<Interceptor<? extends Message>> outInterceptor= new ArrayList<>();
 	    	outInterceptor.add(getWss4JOutInterceptor());
+	    	outInterceptor.add(new HeaderInterceptor());
 	    	
 	    	cxfEndpoint.setOutInterceptors(outInterceptor);
 	    	cxfEndpoint.setFeatures(
 	    	        new ArrayList<>(Arrays.asList(loggingFeature())));
-	    	
+	    
 	    	
 	    	return cxfEndpoint;
 	    }
@@ -159,12 +161,16 @@ public class Config {
 	        outProps.put(WSHandlerConstants.SIGNATURE_PARTS,
 	                "{}{http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd}Timestamp;" +
 	                "{}{http://schemas.xmlsoap.org/soap/envelope/}Body;"+
-	                "{}{http://schemas.kvk.nl/schemas/hrip/dataservice/2015/02}ophalenInschrijvingRequest"
-	                //"{Element}{http://www.w3.org/2005/08/addressing}Header"
+	                "{}{http://www.w3.org/2005/08/addressing}To;"+
+	                "{}{http://www.w3.org/2005/08/addressing}MessageID;"+
+	                "{}{http://www.w3.org/2005/08/addressing}Action"
 	        		);
 	        //outProps.put(WSHandlerConstants.SIG_ALGO, "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256");
 	
-	        return new WSS4JOutInterceptor(outProps);
+	        WSS4JOutInterceptor wss4jOutInterceptor = new WSS4JOutInterceptor(outProps);
+	        
+	        
+	        return wss4jOutInterceptor;
 	    }
 
 }
